@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class Delete < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/files/delete".freeze
+    Path        = '/2/files/delete'
     ResultType  = DropboxApi::Metadata::Resource
     ErrorType   = DropboxApi::Errors::DeleteError
 
@@ -24,9 +26,11 @@ module DropboxApi::Endpoints::Files
     add_endpoint :delete do |path, options = {}|
       validate_options([:parent_rev], options)
 
-      perform_request options.merge({
-        :path => path
-      })
+      perform_request options.merge(
+        {
+          path: path
+        }
+      )
     end
   end
 end

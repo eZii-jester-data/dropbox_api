@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   # Example of a serialized {UploadSessionCursor} object:
   #
@@ -11,8 +13,8 @@ module DropboxApi::Metadata
     field :session_id, String
     field :offset, Integer
 
-    def offset=(n)
-      self[:offset] = n
+    def offset=(value)
+      self[:offset] = value
     end
   end
 end

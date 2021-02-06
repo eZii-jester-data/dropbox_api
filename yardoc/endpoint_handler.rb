@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module YARD
   class EndpointHandler < Handlers::Ruby::MethodHandler
     handles method_call(:add_endpoint)
@@ -8,7 +10,7 @@ module YARD
         CodeObjects::MethodObject.new(namespace, name) do |m|
           m.parameters = parameters
         end,
-        CodeObjects::MethodObject.new(P("DropboxApi::Client"), name) do |m|
+        CodeObjects::MethodObject.new(P('DropboxApi::Client'), name) do |m|
           m.parameters = parameters
           m.group = namespace.namespace.name.downcase
         end
@@ -34,7 +36,9 @@ module YARD
       params = []
 
       if args.unnamed_required_params
-        params += args.unnamed_required_params.map {|a| [a.source, nil] }
+        params += args.unnamed_required_params.map do |a|
+          [a.source, nil]
+        end
       end
 
       if args.unnamed_optional_params
@@ -43,10 +47,12 @@ module YARD
         end
       end
 
-      params << ['*' + args.splat_param.source, nil] if args.splat_param
+      params << ["*#{args.splat_param.source}", nil] if args.splat_param
 
       if args.unnamed_end_params
-        params += args.unnamed_end_params.map {|a| [a.source, nil] }
+        params += args.unnamed_end_params.map do |a|
+          [a.source, nil]
+        end
       end
 
       if args.named_params
@@ -56,10 +62,13 @@ module YARD
       end
 
       if args.double_splat_param
-        params << ['**' + args.double_splat_param.source, nil]
+        params << [
+          "**#{args.double_splat_param.source}",
+          nil
+        ]
       end
 
-      params << ['&' + args.block_param.source, nil] if args.block_param
+      params << ["&#{args.block_param.source}", nil] if args.block_param
 
       params
     end

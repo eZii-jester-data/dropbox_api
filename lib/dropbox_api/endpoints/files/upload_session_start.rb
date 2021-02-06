@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class UploadSessionStart < DropboxApi::Endpoints::ContentUpload
     Method      = :post
-    Path        = "/2/files/upload_session/start".freeze
+    Path        = '/2/files/upload_session/start'
     ResultType  = DropboxApi::Results::UploadSessionStart
     ErrorType   = nil
 
@@ -23,16 +25,16 @@ module DropboxApi::Endpoints::Files
     # @return [DropboxApi::Metadata::UploadSessionCursor] The session cursor
     #   that you can use to continue the upload afterwards.
     add_endpoint :upload_session_start do |content, options = {}|
-      validate_options([
-        :close
-      ], options)
+      validate_options(%i[close], options)
 
       session = perform_request(options, content)
 
-      DropboxApi::Metadata::UploadSessionCursor.new({
-        "session_id" => session.session_id,
-        "offset" => content.bytesize
-      })
+      DropboxApi::Metadata::UploadSessionCursor.new(
+        {
+          'session_id' => session.session_id,
+          'offset' => content.bytesize
+        }
+      )
     end
   end
 end

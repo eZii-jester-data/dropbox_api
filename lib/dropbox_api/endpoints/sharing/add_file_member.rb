@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Sharing
   class AddFileMember < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/sharing/add_file_member".freeze
+    Path        = '/2/sharing/add_file_member'
     ResultType  = DropboxApi::Results::AddFileMemberResultList
     ErrorType   = DropboxApi::Errors::AddFileMemberError
 
@@ -31,16 +33,18 @@ module DropboxApi::Endpoints::Sharing
     #   display to added members in their invitation. This field is optional.
     # @see DropboxApi::Metadata::Member
     add_endpoint :add_file_member do |file, members, options = {}|
-      validate_options([:quiet, :custom_message, :access_level, :add_message_as_comment], options)
+      validate_options(
+        %i[quiet custom_message access_level add_message_as_comment], options
+      )
       options[:quiet] ||= false
       options[:custom_message] ||= nil
       options[:access_level] ||= :viewer
       options[:add_message_as_comment] ||= false
 
       perform_request options.merge({
-        :file => file,
-        :members => build_members_param(members)
-      })
+                                      file: file,
+                                      members: build_members_param(members)
+                                    })
     end
 
     private

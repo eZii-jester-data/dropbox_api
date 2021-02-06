@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Sharing
   class AddFolderMember < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/sharing/add_folder_member".freeze
+    Path        = '/2/sharing/add_folder_member'
     ResultType  = DropboxApi::Results::VoidResult
     ErrorType   = DropboxApi::Errors::AddFolderMemberError
 
@@ -36,14 +38,16 @@ module DropboxApi::Endpoints::Sharing
     #   added members in their invitation. This field is optional.
     # @see DropboxApi::Metadata::AddMember
     add_endpoint :add_folder_member do |folder_id, members, options = {}|
-      validate_options([:quiet, :custom_message], options)
+      validate_options(
+        %i[quiet custom_message], options
+      )
       options[:quiet] ||= false
       options[:custom_message] ||= nil
 
       perform_request options.merge({
-        :shared_folder_id => folder_id.to_s,
-        :members => build_members_param(members)
-      })
+                                      shared_folder_id: folder_id.to_s,
+                                      members: build_members_param(members)
+                                    })
     end
 
     private

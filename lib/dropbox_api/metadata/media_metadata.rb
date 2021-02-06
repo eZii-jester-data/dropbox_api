@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   # Example of a serialized {MediaInfo} object:
-  # 
+  #
   # ```json
   # {
   #   ".tag": "video",

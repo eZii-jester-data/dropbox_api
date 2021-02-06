@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Sharing
   class ListSharedLinks < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/sharing/list_shared_links".freeze
+    Path        = '/2/sharing/list_shared_links'
     ResultType  = DropboxApi::Results::ListSharedLinksResult
     ErrorType   = DropboxApi::Errors::ListSharedLinksError
 
@@ -22,7 +24,9 @@ module DropboxApi::Endpoints::Sharing
     # @option options direct_only [Boolean]
     # @return [ListSharedLinksResult]
     add_endpoint :list_shared_links do |options = {}|
-      validate_options([:path, :cursor, :direct_only], options)
+      validate_options(
+        %i[path cursor direct_only], options
+      )
 
       perform_request options
     end

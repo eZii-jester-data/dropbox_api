@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class GetThumbnailBatch < DropboxApi::Endpoints::RpcContent
     Method      = :post
-    Path        = "/2/files/get_thumbnail_batch".freeze
+    Path        = '/2/files/get_thumbnail_batch'
     ResultType  = DropboxApi::Results::GetThumbnailBatchResult
     ErrorType   = DropboxApi::Errors::ThumbnailBatchError
 
@@ -20,19 +22,20 @@ module DropboxApi::Endpoints::Files
     #   How to resize and crop the image to achieve the desired size. The default
     #   for this union is strict.
     add_endpoint :get_thumbnail_batch do |paths, options = {}|
-      validate_options([:format, :size, :mode], options)
+      validate_options(
+        %i[format size mode], options
+      )
       options[:format] ||= :jpeg
       options[:size] ||= :w64h64
       options[:mode] ||= :strict
 
-      perform_request :entries => build_entries_params(paths, options)
+      perform_request entries: build_entries_params(paths, options)
     end
 
     def build_entries_params(paths, options)
       paths.map do |path|
-        options.merge({ :path => path })
+        options.merge({ path: path })
       end
     end
-
   end
 end

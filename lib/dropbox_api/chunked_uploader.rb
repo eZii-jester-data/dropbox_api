@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi
   class ChunkedUploader
     include DropboxApi::OptionsValidator
@@ -13,7 +15,7 @@ module DropboxApi
 
     def start
       chunk = @i_stream.read @chunk_size
-      chunk = "" if chunk.nil?
+      chunk = '' if chunk.nil?
 
       @cursor = @client.upload_session_start chunk
     end
@@ -35,12 +37,15 @@ module DropboxApi
     private
 
     def init_commit_info(path, options)
-      validate_options([
-        :mode,
-        :autorename,
-        :client_modified,
-        :mute
-      ], options)
+      validate_options(
+        %i[
+          mode
+          autorename
+          client_modified
+          mute
+        ],
+        options
+      )
 
       options[:path] = path
       @commit_info = DropboxApi::Metadata::CommitInfo.build_from_options options

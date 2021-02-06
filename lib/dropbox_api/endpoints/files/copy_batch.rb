@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class CopyBatch < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/files/copy_batch_v2".freeze
+    Path        = '/2/files/copy_batch_v2'
     ResultType  = DropboxApi::Results::CopyBatchResult
 
     include DropboxApi::OptionsValidator
@@ -22,14 +24,10 @@ module DropboxApi::Endpoints::Files
     #   conflict. The default for this field is `false`.
     # @return [String, Array] Either the job id or the list of job statuses.
     add_endpoint :copy_batch do |entries, options = {}|
-      validate_options([
-        :autorename
-      ], options)
+      validate_options([:autorename], options)
       options[:autorename] ||= false
 
-      perform_request(options.merge({
-        :entries => entries
-      }))
+      perform_request(options.merge({ entries: entries }))
     end
   end
 end

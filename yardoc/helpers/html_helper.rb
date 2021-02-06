@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module YARD
   module Templates::Helpers
     module HtmlHelper
@@ -12,10 +14,10 @@ module YARD
         str.gsub(/^( ){#{indent_size}}/, '')
       end
 
-      def untab(str, tab_size = 2)
+      def untab(str, _tab_size = 2)
         tab_space = 2
 
-        str.gsub("\t", " " * tab_space)
+        str.gsub("\t", ' ' * tab_space)
       end
     end
   end

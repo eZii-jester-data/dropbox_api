@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   # Example of a serialized {MediaInfo} object:
   #
@@ -36,7 +38,8 @@ module DropboxApi::Metadata
         when :metadata
           DropboxApi::Metadata::MediaMetadata
         else
-          raise ArgumentError, "Unable to build individual result with `#{tag.inspect}`"
+          raise ArgumentError,
+                "Unable to build individual result with `#{tag.inspect}`"
         end
       end
     end

@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   class SharedLink < Base
-    VALID_KEYS = [:url, :password]
+    VALID_KEYS = %i[url password].freeze
 
     def initialize(param)
       @shared_link =
         case param
         when String
-          {:url => param}
+          { url: param }
         when Hash
           param
         end
@@ -15,13 +17,12 @@ module DropboxApi::Metadata
     end
 
     def check_validity
-      if @shared_link[:url].nil?
-        raise ArgumentError, "Missing `:url` option"
-      end
+      raise ArgumentError, 'Missing `:url` option' if @shared_link[:url].nil?
 
-      @shared_link.keys.each do |key|
+      @shared_link.each_key do |key|
         unless VALID_KEYS.include? key
-          raise ArgumentError, "Invalid option `#{key.inspect}`"
+          raise ArgumentError,
+                "Invalid option `#{key.inspect}`"
         end
       end
     end
@@ -32,7 +33,6 @@ module DropboxApi::Metadata
 
     private
 
-    def valid_keys
-    end
+    def valid_keys; end
   end
 end

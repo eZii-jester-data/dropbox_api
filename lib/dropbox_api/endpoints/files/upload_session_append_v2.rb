@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class UploadSessionAppendV2 < DropboxApi::Endpoints::ContentUpload
     Method      = :post
-    Path        = "/2/files/upload_session/append_v2".freeze
+    Path        = '/2/files/upload_session/append_v2'
     ResultType  = DropboxApi::Results::VoidResult
     ErrorType   = DropboxApi::Errors::UploadSessionLookupError
 
@@ -36,13 +38,9 @@ module DropboxApi::Endpoints::Files
     #   The default for this field is `false`.
     # @see UploadSessionCursor
     add_endpoint :upload_session_append_v2 do |cursor, content, options = {}|
-      validate_options([
-        :close
-      ], options)
+      validate_options([:close], options)
 
-      perform_request(options.merge({
-        :cursor => cursor.to_hash
-      }), content)
+      perform_request(options.merge({ cursor: cursor.to_hash }), content)
 
       cursor.offset += content.bytesize
     end

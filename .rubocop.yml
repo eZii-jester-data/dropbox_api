@@ -1,14 +1,28 @@
 inherit_from: .rubocop_todo.yml
 
-Style/HashSyntax:
-  Enabled: true
-  EnforcedStyle: 'hash_rockets'
+AllCops:
+  NewCops: enable
 
 Style/ClassAndModuleChildren:
-  Enabled: false
+  EnforcedStyle: compact
 
 Style/Documentation:
   Enabled: false
 
+Style/RedundantBegin:
+  Enabled: false
+
+Style/CollectionCompact:
+  Enabled: false
+
 Naming/ConstantName:
   Enabled: false
+
+Layout/ArrayAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/HashAlignment:
+  EnforcedColonStyle: key
+
+Layout/CaseIndentation:
+  EnforcedStyle: end

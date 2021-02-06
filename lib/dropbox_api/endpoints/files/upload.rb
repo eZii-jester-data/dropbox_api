@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class Upload < DropboxApi::Endpoints::ContentUpload
     Method      = :post
-    Path        = "/2/files/upload".freeze
+    Path        = '/2/files/upload'
     ResultType  = DropboxApi::Metadata::File
     ErrorType   = DropboxApi::Errors::UploadError
 
@@ -47,12 +49,14 @@ module DropboxApi::Endpoints::Files
     #   this field is `false`.
     # @see DropboxApi::Metadata::WriteMode
     add_endpoint :upload do |path, content, options = {}|
-      validate_options([
-        :mode,
-        :autorename,
-        :client_modified,
-        :mute
-      ], options)
+      validate_options(
+        %i[
+          mode
+          autorename
+          client_modified
+          mute
+        ], options
+      )
 
       options[:path] = path
       commit_info = DropboxApi::Metadata::CommitInfo.build_from_options options

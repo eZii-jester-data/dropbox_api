@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class ListFolderGetLatestCursor < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/files/list_folder/get_latest_cursor".freeze
+    Path        = '/2/files/list_folder/get_latest_cursor'
     ResultType  = DropboxApi::Results::ListFolderGetLatestCursorResult
     ErrorType   = DropboxApi::Errors::ListFolderError
 
@@ -25,13 +27,15 @@ module DropboxApi::Endpoints::Files
     #   file or folder, otherwise {DropboxApi::Errors::LookupError} will be
     #   returned. The default for this field is `false`.
     add_endpoint :list_folder_get_latest_cursor do |options = {}|
-      validate_options([
-        :path,
-        :recursive,
-        :include_media_info,
-        :include_deleted,
-        :include_has_explicit_shared_members
-      ], options)
+      validate_options(
+        %i[
+          path
+          recursive
+          include_media_info
+          include_deleted
+          include_has_explicit_shared_members
+        ], options
+      )
       options[:recursive] ||= false
       options[:include_media_info] ||= false
       options[:include_deleted] ||= false

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   # An action will be one of the following:
   #
@@ -18,14 +20,14 @@ module DropboxApi::Metadata
   # }
   # ```
   class MemberAction < DropboxApi::Metadata::Tag
-    VALID_MEMBER_ACTIONS = [
-      :leave_a_copy,
-      :make_editor,
-      :make_owner,
-      :make_viewer,
-      :make_viewer_no_comment,
-      :remove
-    ]
+    VALID_MEMBER_ACTIONS = %i[
+      leave_a_copy
+      make_editor
+      make_owner
+      make_viewer
+      make_viewer_no_comment
+      remove
+    ].freeze
 
     def self.valid_values
       VALID_MEMBER_ACTIONS

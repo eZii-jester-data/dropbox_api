@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints
   class ContentDownload < DropboxApi::Endpoints::Base
     def initialize(builder)
-      @connection = builder.build("https://content.dropboxapi.com") do |c|
+      @connection = builder.build('https://content.dropboxapi.com') do |c|
         c.response :decode_result
       end
     end
@@ -13,7 +15,7 @@ module DropboxApi::Endpoints
         'Content-Type' => ''
       }
 
-      return body, headers
+      [body, headers]
     end
 
     def perform_request(params)

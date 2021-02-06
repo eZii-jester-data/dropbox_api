@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   # Examples of serialized {AddMember} objects:
   #
@@ -15,15 +17,16 @@ module DropboxApi::Metadata
   class Member < Base
     def initialize(member)
       @member_hash = case member
-        when Hash
-          member
-        when String
-          hash_from_email_or_dropbox_id member
-        when DropboxApi::Metadata::Member
-          member.to_hash
-        else
-          raise ArgumentError, "Invalid object for Member: #{member.inspect}"
-        end
+      when Hash
+        member
+      when String
+        hash_from_email_or_dropbox_id member
+      when DropboxApi::Metadata::Member
+        member.to_hash
+      else
+        raise ArgumentError,
+              "Invalid object for Member: #{member.inspect}"
+      end
     end
 
     def to_hash
@@ -33,7 +36,7 @@ module DropboxApi::Metadata
     private
 
     def hash_from_email_or_dropbox_id(email_or_id)
-      if email_or_id.start_with? "dbid:"
+      if email_or_id.start_with? 'dbid:'
         hash_from_dropbox_id email_or_id
       elsif email_or_id =~ /\A[^@\s]+@[^@\s]+\z/
         hash_from_email email_or_id
@@ -44,15 +47,15 @@ module DropboxApi::Metadata
 
     def hash_from_dropbox_id(dropbox_id)
       {
-        :".tag" => :dropbox_id,
-        :dropbox_id => dropbox_id
+        ".tag": :dropbox_id,
+        dropbox_id: dropbox_id
       }
     end
 
     def hash_from_email(email)
       {
-        :".tag" => :email,
-        :email => email
+        ".tag": :email,
+        email: email
       }
     end
   end

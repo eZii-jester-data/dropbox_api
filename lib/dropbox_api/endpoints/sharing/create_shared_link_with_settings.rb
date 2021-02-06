@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Sharing
   class CreateSharedLinkWithSettings < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/sharing/create_shared_link_with_settings".freeze
+    Path        = '/2/sharing/create_shared_link_with_settings'
     ResultType  = DropboxApi::Metadata::SharedLinkMetadata
     ErrorType   = DropboxApi::Errors::CreateSharedLinkWithSettingsError
 
@@ -29,19 +31,23 @@ module DropboxApi::Endpoints::Sharing
     # @option settings expires Expiration time of the shared link. By default
     #   the link won't expire. This field is optional.
     add_endpoint :create_shared_link_with_settings do |path, settings = {}|
-      validate_options([
-        :requested_visibility,
-        :link_password,
-        :expires
-      ], settings)
+      validate_options(
+        %i[
+          requested_visibility
+          link_password
+          expires
+        ], settings
+      )
       settings[:requested_visibility] ||= 'public'
       settings[:link_password] ||= nil
       settings[:expires] ||= nil
 
-      perform_request({
-        :path => path,
-        :settings => settings
-      })
+      perform_request(
+        {
+          path: path,
+          settings: settings
+        }
+      )
     end
   end
 end

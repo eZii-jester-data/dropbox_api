@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints
   class Rpc < DropboxApi::Endpoints::Base
     def initialize(builder)
-      @connection = builder.build("https://api.dropboxapi.com") do |c|
+      @connection = builder.build('https://api.dropboxapi.com') do |c|
         c.response :decode_result
       end
     end
@@ -11,7 +13,7 @@ module DropboxApi::Endpoints
         'content-type' => 'application/json'
       }
 
-      return request_body(params), request_headers
+      [request_body(params), request_headers]
     end
 
     def request_body(params)

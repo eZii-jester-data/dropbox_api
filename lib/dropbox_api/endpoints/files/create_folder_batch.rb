@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class CreateFolderBatch < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/files/create_folder_batch".freeze
+    Path        = '/2/files/create_folder_batch'
     ResultType  = DropboxApi::Results::CreateFolderBatchResult
 
     include DropboxApi::OptionsValidator
@@ -25,16 +27,16 @@ module DropboxApi::Endpoints::Files
     #   happen asynchronously. The default for this field is `false`.
     # @return [String, Array] Either the job id or the list of job statuses.
     add_endpoint :create_folder_batch do |paths, options = {}|
-      validate_options([
-        :autorename,
-        :force_async
-      ], options)
+      validate_options(
+        %i[
+          autorename
+          force_async
+        ], options
+      )
       options[:autorename] ||= false
       options[:force_async] ||= false
 
-      perform_request(options.merge({
-        :paths => paths
-      }))
+      perform_request(options.merge({ paths: paths }))
     end
   end
 end

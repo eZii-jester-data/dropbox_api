@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class DeleteBatch < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/files/delete_batch".freeze
+    Path        = '/2/files/delete_batch'
     ResultType  = DropboxApi::Results::DeleteBatchResult
 
     # Delete multiple files/folders at once.
@@ -14,9 +16,11 @@ module DropboxApi::Endpoints::Files
     #   fields: `path` (mandatory) & parent_rev (optional).
     # @return [String, Array] Either the job id or the list of job statuses.
     add_endpoint :delete_batch do |entries|
-      perform_request({
-        :entries => entries
-      })
+      perform_request(
+        {
+          entries: entries
+        }
+      )
     end
   end
 end

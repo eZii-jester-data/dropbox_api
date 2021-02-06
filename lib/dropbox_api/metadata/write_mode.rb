@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   # Your intent when writing a file to some path. This is used to determine
   # what constitutes a conflict and what the autorename strategy is.
@@ -25,11 +27,11 @@ module DropboxApi::Metadata
   #   "document (conflicted copy).txt" or
   #   "document (Panda's conflicted copy).txt".
   class WriteMode < Base
-    VALID_WRITE_MODES = [
-      :add,
-      :overwrite,
-      :update
-    ]
+    VALID_WRITE_MODES = %i[
+      add
+      overwrite
+      update
+    ].freeze
 
     # @example
     #   DropboxApi::Metadata::WriteMode.new :add
@@ -48,22 +50,23 @@ module DropboxApi::Metadata
         @write_mode = write_mode
       when String, ::Symbol
         @write_mode = {
-          ".tag" => write_mode
+          '.tag' => write_mode
         }
         @write_mode[write_mode.to_s] = options unless options.nil?
       end
-      @write_mode[".tag"] = @write_mode[".tag"].to_sym
+      @write_mode['.tag'] = @write_mode['.tag'].to_sym
 
       check_validity
     end
 
     def check_validity
-      unless valid_mode? @write_mode[".tag"]
-        raise ArgumentError, "Invalid write mode: #{@write_mode[".tag"]}"
+      unless valid_mode? @write_mode['.tag']
+        raise ArgumentError,
+              "Invalid write mode: #{@write_mode['.tag']}"
       end
 
-      if @write_mode[".tag"] == :update && @write_mode["update"].nil?
-        raise ArgumentError, "Mode `:update` expects a `rev` number"
+      if @write_mode['.tag'] == :update && @write_mode['update'].nil?
+        raise ArgumentError, 'Mode `:update` expects a `rev` number'
       end
     end
 

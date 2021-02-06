@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class ListRevisions < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/files/list_revisions".freeze
+    Path        = '/2/files/list_revisions'
     ResultType  = DropboxApi::Results::ListRevisionsResult
     ErrorType   = DropboxApi::Errors::ListRevisionsError
 
@@ -13,14 +15,10 @@ module DropboxApi::Endpoints::Files
     # @option options limit [Numeric] The maximum number of revision entries
     #   returned. The default for this field is 10.
     add_endpoint :list_revisions do |path, options = {}|
-      validate_options([
-        :limit
-      ], options)
+      validate_options([:limit], options)
       options[:limit] ||= 10
 
-      perform_request options.merge({
-        :path => path
-      })
+      perform_request options.merge({ path: path })
     end
   end
 end

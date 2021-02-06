@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class CreateFileRequest < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/file_requests/create".freeze
+    Path        = '/2/file_requests/create'
     ResultType  = DropboxApi::Metadata::FileRequest
     ErrorType   = DropboxApi::Errors::CreateFileRequestError
 
@@ -12,10 +14,12 @@ module DropboxApi::Endpoints::Files
     #   uploaded files will be sent. For apps with the app folder permission,
     #   this will be relative to the app folder.
     add_endpoint :create_file_request do |title, destination|
-      perform_request({
-        :title => title,
-        :destination => destination
-      })
+      perform_request(
+        {
+          title: title,
+          destination: destination
+        }
+      )
     end
   end
 end

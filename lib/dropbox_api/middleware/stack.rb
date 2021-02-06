@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module DropboxApi::MiddleWare
   class Stack
     def initialize
-      @prependable, @appendable = [], []
+      @prependable = []
+      @appendable = []
     end
 
     def prepend(&block)
@@ -12,9 +15,7 @@ module DropboxApi::MiddleWare
       @appendable << block
     end
 
-    def adapter=(value)
-      @adapter = value
-    end
+    attr_writer :adapter
 
     def apply(connection)
       @prependable.each { |block| block.yield(connection) }

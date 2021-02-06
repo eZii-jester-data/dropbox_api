@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   class CommitInfo < Base
     field :path, String
@@ -17,7 +19,7 @@ module DropboxApi::Metadata
           when :path, :autorename, :mute
             [key.to_s, value]
           end
-        end.compact]
+        end]
 
         new(options)
       end
@@ -36,7 +38,7 @@ module DropboxApi::Metadata
       end
 
       def build_client_modified(client_modified)
-        client_modified.utc.strftime("%FT%TZ")
+        client_modified.utc.strftime('%FT%TZ')
       end
     end
   end

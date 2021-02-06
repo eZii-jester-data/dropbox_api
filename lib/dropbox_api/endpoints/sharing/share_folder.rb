@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Sharing
   class ShareFolder < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/sharing/share_folder".freeze
+    Path        = '/2/sharing/share_folder'
     ResultType  = DropboxApi::Results::ShareFolderLaunch
     ErrorType   = DropboxApi::Errors::ShareFolderError
 
@@ -34,12 +36,14 @@ module DropboxApi::Endpoints::Sharing
     #   happen asynchronously. The default for this field is `false`.
     # @return [DropboxApi::Results::ShareFolderLaunch] Shared folder metadata.
     add_endpoint :share_folder do |path, options = {}|
-      validate_options([
-        :member_policy,
-        :acl_update_policy,
-        :shared_link_policy,
-        :force_async
-      ], options)
+      validate_options(
+        %i[
+          member_policy
+          acl_update_policy
+          shared_link_policy
+          force_async
+        ], options
+      )
       options[:member_policy] ||= :anyone
       options[:acl_update_policy] ||= :owner
       options[:shared_link_policy] ||= :anyone
@@ -47,10 +51,10 @@ module DropboxApi::Endpoints::Sharing
 
       begin
         perform_request options.merge({
-          :path => path
-        })
-      rescue DropboxApi::Errors::AlreadySharedError => error
-        error.shared_folder
+                                        path: path
+                                      })
+      rescue DropboxApi::Errors::AlreadySharedError => e
+        e.shared_folder
       end
     end
   end

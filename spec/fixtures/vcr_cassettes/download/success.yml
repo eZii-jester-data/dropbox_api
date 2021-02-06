@@ -59,7 +59,7 @@ http_interactions:
       - noindex, nofollow, noimageindex
     body:
       encoding: UTF-8
-      string: "Viva Rusia!\n"
+      string: "Oh well....\n"
     http_version:
   recorded_at: Sun, 11 Dec 2016 11:39:25 GMT
 recorded_with: VCR 3.0.1

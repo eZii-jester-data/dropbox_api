@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Sharing
   class GetSharedLinkMetadata < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = '/2/sharing/get_shared_link_metadata'.freeze
+    Path        = '/2/sharing/get_shared_link_metadata'
     ResultType  = DropboxApi::Metadata::SharedLinkMetadata
     ErrorType   = DropboxApi::Errors::SharedLinkError
 
@@ -20,10 +22,12 @@ module DropboxApi::Endpoints::Sharing
     #   a password, this parameter can be used.
     # @return [SharedFileMembers]
     add_endpoint :get_shared_link_metadata do |preview_link, options = {}|
-      validate_options([:path, :link_password], options)
+      validate_options(
+        %i[path link_password], options
+      )
 
       perform_request options.merge(
-        :url => preview_link
+        url: preview_link
       )
     end
   end

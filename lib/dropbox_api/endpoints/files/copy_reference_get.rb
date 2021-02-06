@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class CopyReferenceGet < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/files/copy_reference/get".freeze
+    Path        = '/2/files/copy_reference/get'
     ResultType  = DropboxApi::Results::GetCopyReferenceResult
     ErrorType   = DropboxApi::Errors::GetCopyReferenceError
 
@@ -13,9 +15,9 @@ module DropboxApi::Endpoints::Files
     #   copy reference to.
     # @return [DropboxApi::Results::GetCopyReferenceResult]
     add_endpoint :copy_reference_get do |path|
-      perform_request({
-        :path => path
-      })
+      perform_request(
+        { path: path }
+      )
     end
   end
 end

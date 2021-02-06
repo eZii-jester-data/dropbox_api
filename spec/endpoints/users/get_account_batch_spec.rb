@@ -1,12 +1,15 @@
-describe DropboxApi::Client, "#get_account_batch" do
+# frozen_string_literal: true
+
+describe DropboxApi::Client, '#get_account_batch' do
   before :each do
     @client = DropboxApi::Client.new
   end
 
-  it "returns account information of all given IDs", :cassette => "get_account_batch/success" do
+  it 'returns account information of all given IDs',
+     cassette: 'get_account_batch/success' do
     test_accounts = {
-      "dbid:AACiYqkuK0t_wIvlr9BduHKdhzk_H28Dg0U" => "Antonio Hidalgo",
-      "dbid:AAAKVPLEKkkccsZMFkkZNXFeyXrPPhrtFxs" => "Jesus Burgos"
+      'dbid:AACiYqkuK0t_wIvlr9BduHKdhzk_H28Dg0U' => 'Antonio Hidalgo',
+      'dbid:AAAKVPLEKkkccsZMFkkZNXFeyXrPPhrtFxs' => 'Jesus Burgos'
     }
     accounts = @client.get_account_batch test_accounts.keys
 
@@ -17,14 +20,15 @@ describe DropboxApi::Client, "#get_account_batch" do
     end
   end
 
-  it "raises an error if one account can't e found", :cassette => "get_account_batch/no_account" do
-    account_ids = %w(
+  it "raises an error if one account can't e found",
+     cassette: 'get_account_batch/no_account' do
+    account_ids = %w[
       dbid:AAAKVPLEKkkccsZMFkkZNXFeyXrPPhrtXXX
       dbid:AAAKVPLEKkkccsZMFkkZNXFeyXrPPhrtFxs
-    )
+    ]
 
-    expect {
+    expect do
       @client.get_account_batch account_ids
-    }.to raise_error(DropboxApi::Errors::NoAccountError)
+    end.to raise_error(DropboxApi::Errors::NoAccountError)
   end
 end

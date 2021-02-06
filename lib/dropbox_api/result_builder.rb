@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi
   class ResultBuilder
     def initialize(response_data)
@@ -5,11 +7,11 @@ module DropboxApi
     end
 
     def error_summary
-      @response_data["error_summary"] if @response_data.is_a? Hash
+      @response_data['error_summary'] if @response_data.is_a? Hash
     end
 
     def error
-      @response_data["error"]
+      @response_data['error']
     end
 
     def has_error?

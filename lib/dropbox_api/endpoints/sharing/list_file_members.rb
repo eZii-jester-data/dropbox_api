@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Sharing
   class ListFileMembers < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/sharing/list_file_members".freeze
+    Path        = '/2/sharing/list_file_members'
     ResultType  = DropboxApi::Results::SharedFileMembers
     ErrorType   = DropboxApi::Errors::SharingFileAccessError
 
@@ -34,13 +36,15 @@ module DropboxApi::Endpoints::Sharing
     # @return [SharedFileMembers] Shared file user and group membership.
     # @see Metadata::MemberActionList
     add_endpoint :list_file_members do |file_id, actions = [], options = {}|
-      validate_options([:limit, :include_inherited], options)
+      validate_options(
+        %i[limit include_inherited], options
+      )
       options[:limit] ||= 100
 
       perform_request options.merge({
-        :file => file_id,
-        :actions => DropboxApi::Metadata::MemberActionList.new(actions)
-      })
+                                      file: file_id,
+                                      actions: DropboxApi::Metadata::MemberActionList.new(actions)
+                                    })
     end
   end
 end

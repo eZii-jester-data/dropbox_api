@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class GetMetadata < DropboxApi::Endpoints::Rpc
     Method      = :post
-    Path        = "/2/files/get_metadata".freeze
+    Path        = '/2/files/get_metadata'
     ResultType  = DropboxApi::Metadata::Resource
     ErrorType   = DropboxApi::Errors::GetMetadataError
 
@@ -27,15 +29,15 @@ module DropboxApi::Endpoints::Files
     #   {DropboxApi::Errors::NotFoundError}
     #   will be raised. The default for this field is `false`.
     add_endpoint :get_metadata do |path, options = {}|
-      validate_options([
-        :include_media_info,
-        :include_deleted,
-        :include_has_explicit_shared_members
-      ], options)
+      validate_options(
+        %i[
+          include_media_info
+          include_deleted
+          include_has_explicit_shared_members
+        ], options
+      )
 
-      perform_request(options.merge({
-        :path => path
-      }))
+      perform_request(options.merge({ path: path }))
     end
   end
 end

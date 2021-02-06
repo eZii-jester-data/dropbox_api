@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class GetThumbnail < DropboxApi::Endpoints::ContentDownload
     Method      = :post
-    Path        = "/2/files/get_thumbnail".freeze
+    Path        = '/2/files/get_thumbnail'
     ResultType  = DropboxApi::Metadata::File
     ErrorType   = DropboxApi::Errors::PreviewError
 
@@ -45,13 +47,13 @@ module DropboxApi::Endpoints::Files
     # @option options size [:w32h32, :w64h64, :w128h128, :w640h480, :w1024h768]
     #   The size for the thumbnail image. The default is `:w64h64`.
     add_endpoint :get_thumbnail do |path, options = {}, &block|
-      validate_options([:format, :size], options)
+      validate_options(
+        %i[format size], options
+      )
       options[:format] ||= :jpeg
       options[:size] ||= :w64h64
 
-      perform_request(options.merge({
-        :path => path
-      }), &block)
+      perform_request(options.merge({ path: path }), &block)
     end
   end
 end

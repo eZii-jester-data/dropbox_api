@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   class Base
     class << self
@@ -31,7 +33,7 @@ module DropboxApi::Metadata
     # @raise [ArgumentError] If a required attribute is missing.
     # @param metadata [Hash]
     def initialize(metadata)
-      self.class.fields.keys.each do |field_name|
+      self.class.fields.each_key do |field_name|
         self[field_name] = metadata[field_name.to_s]
       end
     end
@@ -46,7 +48,7 @@ module DropboxApi::Metadata
       value = send field_name
       case value
       when Time
-        value.utc.strftime("%FT%TZ")
+        value.utc.strftime('%FT%TZ')
       when DropboxApi::Metadata::Base
         value.to_hash
       else

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints
   class ContentUpload < DropboxApi::Endpoints::Base
     def initialize(builder)
-      @connection = builder.build("https://content.dropboxapi.com") do |c|
+      @connection = builder.build('https://content.dropboxapi.com') do |c|
         c.response :decode_result
       end
     end
@@ -15,7 +17,7 @@ module DropboxApi::Endpoints
       content_length = get_content_length body
       headers['Content-Length'] = content_length unless content_length.nil?
 
-      return body, headers
+      [body, headers]
     end
 
     def perform_request(params, content)

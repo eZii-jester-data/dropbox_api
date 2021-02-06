@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   # Example of a serialized {BasicAccount} object:
   #
@@ -14,7 +16,7 @@ module DropboxApi::Metadata
   #   "email_verified": true,
   #   "disabled": false,
   #   "is_teammate": true,
-  #   "profile_photo_url": "https://dl-web.dropbox.com/account_photo/get/dbid%3AAAH4f99T0taONIb-OurWxbNQ6ywGRopQngc?vers=1453416696524&size=128x128",
+  #   "profile_photo_url": "...",
   #   "team_member_id": "dbmid:AAHhy7WsR0x-u4ZCqiDl5Fz5zvuL3kmspwU"
   # }
   # ```

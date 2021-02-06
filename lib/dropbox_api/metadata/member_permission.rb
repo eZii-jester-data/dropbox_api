@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module DropboxApi::Metadata
   # This is an example of a serialized {MemberPermission}:
-  # 
+  #
   # ```json
   # {
   #   "action": {

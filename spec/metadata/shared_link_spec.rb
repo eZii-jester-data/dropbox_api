@@ -1,25 +1,27 @@
+# frozen_string_literal: true
+
 describe DropboxApi::Metadata::SharedLink do
-  describe "#to_hash" do
-    it "works with a string URL" do
-      url = "http://www.dropbox.com/my/cats/name/s/mittens"
+  describe '#to_hash' do
+    it 'works with a string URL' do
+      url = 'http://www.dropbox.com/my/cats/name/s/mittens'
       shared_link = described_class.new url
 
       expect(shared_link.to_hash)
-        .to eq({:url => url})
+        .to eq({ url: url })
     end
 
-    it "works with a hash URL" do
-      url = "http://www.dropbox.com/my/cats/name/s/mittens"
-      shared_link = described_class.new :url => url
+    it 'works with a hash URL' do
+      url = 'http://www.dropbox.com/my/cats/name/s/mittens'
+      shared_link = described_class.new url: url
 
       expect(shared_link.to_hash)
-        .to eq({:url => url})
+        .to eq({ url: url })
     end
 
-    it "works with a hash URL and password" do
+    it 'works with a hash URL and password' do
       param = {
-        :url => "http://www.dropbox.com/my/cats/name/s/mittens",
-        :password => "jibiri"
+        url: 'http://www.dropbox.com/my/cats/name/s/mittens',
+        password: 'jibiri'
       }
       shared_link = described_class.new param
 
@@ -27,15 +29,15 @@ describe DropboxApi::Metadata::SharedLink do
         .to eq(param)
     end
 
-    it "fails with invalid options" do
+    it 'fails with invalid options' do
       param = {
-        :url => "http://www.dropbox.com/my/cats/name/s/mittens",
-        :jibiri => "jibiri"
+        url: 'http://www.dropbox.com/my/cats/name/s/mittens',
+        jibiri: 'jibiri'
       }
 
-      expect {
+      expect do
         shared_link = described_class.new param
-      }.to raise_error(ArgumentError)
+      end.to raise_error(ArgumentError)
     end
   end
 end

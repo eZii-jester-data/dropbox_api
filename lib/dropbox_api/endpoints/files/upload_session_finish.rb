@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DropboxApi::Endpoints::Files
   class UploadSessionFinish < DropboxApi::Endpoints::ContentUpload
     Method      = :post
-    Path        = "/2/files/upload_session/finish".freeze
+    Path        = '/2/files/upload_session/finish'
     ResultType  = DropboxApi::Metadata::File
     ErrorType   = DropboxApi::Errors::UploadSessionFinishError
 
@@ -19,10 +21,12 @@ module DropboxApi::Endpoints::Files
     # @param commit [DropboxApi::Metadata::CommitInfo] Contains the path and
     #   other optional modifiers for the commit.
     add_endpoint :upload_session_finish do |cursor, commit, content = nil|
-      perform_request({
-        :cursor => cursor.to_hash,
-        :commit => commit.to_hash
-      }, content)
+      perform_request(
+        {
+          cursor: cursor.to_hash,
+          commit: commit.to_hash
+        }, content
+      )
     end
   end
 end

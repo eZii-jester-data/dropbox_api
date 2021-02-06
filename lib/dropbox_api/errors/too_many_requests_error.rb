@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module DropboxApi::Errors
   class TooManyRequestsError < BasicError; end
+
   class TooManyWriteOperationsError < TooManyRequestsError; end
 
   class TooManyRequestsError
@@ -12,8 +15,8 @@ module DropboxApi::Errors
     end
 
     ErrorSubtypes = {
-      :too_many_requests => TooManyRequestsError,
-      :too_many_write_operations => TooManyWriteOperationsError
-    }
+      too_many_requests: TooManyRequestsError,
+      too_many_write_operations: TooManyWriteOperationsError
+    }.freeze
   end
 end
